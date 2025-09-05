@@ -33,7 +33,7 @@ async def fuzz_usb_keyboard():
         await device.type_scancode(random_key, modifiers = random_modifiers if random_modifiers != 0 else None, duration=0.1)
         await asyncio.sleep(0.1)
   
-# Returns a list of KeyboardModifiers keys selected randomly (1-3)
+# Returns a list of KeyboardModifiers keys selected randomly (from 0 up to 3)
 def select_random_modifiers():
     all_mod_keys = list(KeyboardModifiers.__members__.keys())
     count = random.randint(0, min(3, len(all_mod_keys)))
