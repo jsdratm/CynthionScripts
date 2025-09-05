@@ -1,5 +1,5 @@
 # CynthionScripts
-Python scripts written for the Cynthion by Great Scott Gadgets
+Python scripts written for the Cynthion by Great Scott Gadgets (https://greatscottgadgets.com/cynthion/)
 
 Before running a script, make sure you connect the Cynthion to host and target using USB cables and run the "cynthion run facedancer" command from your host
 
