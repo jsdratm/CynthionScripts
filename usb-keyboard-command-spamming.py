@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# This script is designed to use the Cynthion to act as a USB keyboard and repeatedly send a user-specified keyboard shortcut at a high frequency.  It is useful to test specific shortcuts while a device is rebooting.
+# This script is designed to use the Cynthion to act as a USB keyboard and repeatedly send a user-specified keyboard command at a high frequency.  It is useful to test specific commands while a device is rebooting.
 
 import asyncio
   
@@ -11,7 +11,7 @@ from facedancer.classes.hid.keyboard import KeyboardKeys, KeyboardModifiers
 device = USBKeyboardDevice()
 
 # This function prompts the user for a selection, then enters an infinite loop where it repeatedly sends the specified button(s)
-async def send_keyboard_shortcut():
+async def send_keyboard_command():
     # Wait for device to connect
     await asyncio.sleep(2)
   
@@ -173,4 +173,4 @@ async def alt_shift_tab():
         await device.type_scancode(KeyboardKeys.TAB, modifiers=KeyboardModifiers.MOD_LEFT_ALT | KeyboardModifiers.MOD_LEFT_SHIFT, duration=0.1)
         asyncio.sleep(0.1)
   
-main(device, send_keyboard_shortcut())
+main(device, send_keyboard_command())
