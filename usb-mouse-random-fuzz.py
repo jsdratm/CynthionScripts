@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
 # This script is designed to use the Cynthion device to simulate a USB mouse, with random buttons and movements
-# NOTE: Currently the mouse emulation works, but still need to add the random behavior logic
+# NOTE: Currently the mouse emulation and random movement works, but still need to add the random clicking logic
 
 import asyncio
+import random
+
 from math import trunc
 
 from facedancer                        import main
@@ -96,7 +98,7 @@ class USBMouseDevice(USBDevice):
                     END_COLLECTION   (),
                 )    
 
-            @class_request_handler(number=USBStandardRequests.GET_INTERFACE)
+            @class_request_handler(number = USBStandardRequests.GET_INTERFACE)
             @to_this_interface
             def handle_get_interface_request(self, request):
                 # Silently stall GET_INTERFACE class requests.
@@ -112,13 +114,20 @@ class USBMouseDevice(USBDevice):
     def _generate_hid_report(self) -> bytes:
         """ Generates a single HID report for the given mouse state. """
 
-        # For now, just return a report with no buttons pressed and no movement.
+        # For now, just return a report with no buttons pressed
         buttons_byte = 0
-        x_byte = 0
-        y_byte = 0
-        print(f"buttons_byte: {buttons_byte}, x_byte: {x_byte}, y_byte: {y_byte}")
 
-        return bytes([buttons_byte, (trunc(x_byte)) % 255, (trunc(y_byte)) % 255])
+        # Randomly generate x and y movement values between -20 and 20
+        x_byte = random.randint(-20, 20)
+        y_byte = random.randint(-20, 20)
+
+        # Convert to bytes
+        x_byte_converted = (trunc(x_byte)) % 255
+        y_byte_converted = (trunc(y_byte)) % 255
+
+        print(f"buttons_byte: {buttons_byte}, x_byte: {x_byte_converted}, y_byte: {y_byte_converted}")
+
+        return bytes([buttons_byte, x_byte_converted, y_byte_converted])
 
 
     def handle_data_requested(self, endpoint: USBEndpoint):
@@ -134,10 +143,7 @@ async def fuzz_usb_mouse():
     await asyncio.sleep(2)
   
     while True:
-        print("Moving mouse")
-        # TODO: Need to randomize movement and button clicks
-  
-        # Type the selected key with the selected modifiers
-        await asyncio.sleep(0.1)
+        # Let the device do its thing
+        await asyncio.sleep(1)
   
 main(device, fuzz_usb_mouse())
