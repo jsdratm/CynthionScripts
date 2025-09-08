@@ -7,5 +7,6 @@ Before running a script, make sure you connect the Cynthion to host and target u
 
 * usb-keyboard-brute-force.py      - This script is designed to use the Cynthion to emulate a USB keyboard and attempt to type all possible passwords up to a certain length, using a specific character set
 * usb-keyboard-command-spamming.py - This script is designed to use the Cynthion to emulate a USB keyboard and repeatedly send a user-specified keyboard command at a high frequency.  It is useful to test specific keyboard commands while a device is rebooting.
+* usb-keyboard-guess-common-passwords.py - This script is designed to use the Cynthion to emulate a USB keyboard and guess passwords based on a list of the most common passwords
 * usb-keyboard-random-fuzz.py      - This script is designed to use the Cynthion to emulate a USB keyboard, with random buttons and modifiers (ctrl, alt, etc.) being pressed repeatedly
 * usb-mouse-random-fuzz.py         - [IN PROGRESS] This script is designed to use the Cynthion to emulate a USB mouse, with random movement and button clicks
