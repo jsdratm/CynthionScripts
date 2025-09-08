@@ -7,6 +7,7 @@ import asyncio
 
 from facedancer import main
 from facedancer.devices.keyboard     import USBKeyboardDevice
+from facedancer.classes.hid.keyboard import KeyboardKeys
 
 device = USBKeyboardDevice()
 
@@ -138,7 +139,8 @@ async def guess_common_passwords():
 
         print("Attempting password: " + password)
 
-        # Type the password followed by Enter (newline)
-        await device.type_string(password + "\n")
+        # Type the password followed by Enter
+        await device.type_string(password)
+        await device.type_scancode(KeyboardKeys.ENTER)
 
 main(device, guess_common_passwords())
