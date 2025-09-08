@@ -7,7 +7,7 @@ import itertools
 
 from facedancer import main
 from facedancer.devices.keyboard     import USBKeyboardDevice
-from facedancer.classes.hid.keyboard import KeyboardModifiers
+from facedancer.classes.hid.keyboard import KeyboardKeys
 
 device = USBKeyboardDevice()
 
@@ -32,7 +32,8 @@ async def brute_force():
 
             print("Attempting password: " + testString)
 
-            # Type the generated string followed by Enter (newline)
-            await device.type_string(testString + "\n")
+            # Type the generated string followed by Enter
+            await device.type_string(testString)
+            await device.type_scancode(KeyboardKeys.ENTER)
 
 main(device, brute_force())
